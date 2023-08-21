@@ -26,8 +26,11 @@ export const CurrentWeather: FC<CurrentWeatherProps> = ({
       <Block className="col">
         <span className="name">{name}</span>
         <Block className="temp-container">
-          <img src={`${openWeatherImgBaseUrl}/${icon}.png`} />
-          <span className="temp">{`${temparature}°C`}</span>
+          <img
+            src={`${openWeatherImgBaseUrl}/${icon}.png`}
+            alt="open weather icon"
+          />
+          <span className="temp">{`${Math.round(temparature)}°C`}</span>
         </Block>
       </Block>
       <Block className="col">

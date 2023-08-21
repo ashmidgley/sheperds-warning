@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { Block, List, ListItem } from "framework7-react";
 import "./ForecastList.css";
+import { Forecast } from "../../types/Forecast";
 
 interface ForecastsListProps {
-  forecasts: any[];
+  forecasts: Forecast[];
 }
 
 const openWeatherImgBaseUrl = "https://openweathermap.org/img/wn";
@@ -27,15 +28,16 @@ export const ForecastList: FC<ForecastsListProps> = ({ forecasts }) => {
   return (
     <List>
       {forecasts.map((forecast) => (
-        <ListItem key={forecast.dt}>
+        <ListItem key={forecast.timestamp}>
           <Block className="forecast">
             <Block className="day">
               <img
-                src={`${openWeatherImgBaseUrl}/${forecast.weather[0].icon}.png`}
+                src={`${openWeatherImgBaseUrl}/${forecast.icon}.png`}
+                alt="open weather icon"
               />
-              <span>{getDay(forecast.dt)}</span>
+              <span>{getDay(forecast.timestamp)}</span>
             </Block>
-            <span>{`${forecast.temp.max}°C / ${forecast.temp.min}°C`}</span>
+            <span>{`${forecast.max}°C / ${forecast.min}°C`}</span>
           </Block>
         </ListItem>
       ))}

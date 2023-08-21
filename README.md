@@ -49,9 +49,9 @@ npx cap run android
 - City Input
 - Current Weather
 - Weather Forecast
+- Geolocation
 
 ## Unimplemented Features
 
-- Geolocation
 - Data Storage
 - Offline First
