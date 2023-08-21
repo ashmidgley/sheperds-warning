@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+## Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Clone the repo and install dependencies:
 
-## Available Scripts
+```
+git clone https://github.com/ashmidgley/sheperds-warning.git
+npm install
+```
 
-In the project directory, you can run:
+- Create an account on [OpenWeatherMap](https://openweathermap.org).
+- Set up a subscription for the [One Call API 3.0](https://openweathermap.org/api/one-call-3).
+- Create an API Key.
+- Add the key to REACT_APP_OPEN_WEATHER_API_KEY in .env.
 
-### `npm start`
+## Web
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project was initialised using [Create React App](https://create-react-app.dev). All default script's apply:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+npm run build // build
+npm start // run
+```
 
-### `npm test`
+## Mobile
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project uses [Ionic Capacitor](https://capacitorjs.com) to build and run the application on mobile devices.
 
-### `npm run build`
+For iOS and Android, add the platforms:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npx cap add ios && npx cap add android
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Then run using the below commands:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npx cap run ios
+npx cap run android
+```
 
-### `npm run eject`
+## Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [React](https://react.dev)
+- [Ionic Capacitor](https://capacitorjs.com)
+- [Framework7](https://framework7.io)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Implemented Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- City Input
+- Current Weather
+- Weather Forecast
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Unimplemented Features
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Geolocation
+- Data Storage
+- Offline First

@@ -1,0 +1,13 @@
+.banner {
+  margin: 16px !important;
+  padding: 16px !important;
+  border-radius: 12px;
+}
+
+.info {
+  background-color: rgb(59, 130, 246);
+}
+
+.error {
+  background-color: rgb(239, 68, 68);
+}

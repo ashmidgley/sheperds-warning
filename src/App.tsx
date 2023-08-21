@@ -1,25 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import routes from "./routes";
+import { Framework7Parameters } from "framework7/types";
+import { App as Framework7App, View } from "framework7-react";
+
+const f7params = {
+  name: "Sheperd's Warning",
+  routes,
+  darkMode: false,
+} as Framework7Parameters;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Framework7App {...f7params}>
+      <View main url="/" />
+    </Framework7App>
   );
 }
 

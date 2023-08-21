@@ -1,0 +1,30 @@
+.current-weather {
+  background-color: rgb(59, 130, 246);
+  color: white !important;
+  display: flex;
+  justify-content: space-between;
+  margin: 16px !important;
+  padding: 16px !important;
+  border-radius: 12px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.temp-container {
+  display: flex;
+  align-items: center;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+}
+
+.temp {
+  font-size: 32px;
+}
