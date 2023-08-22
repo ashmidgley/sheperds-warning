@@ -24,9 +24,9 @@ export const CurrentWeather: FC<CurrentWeatherProps> = ({
       <Block className="col" textColor="white">
         <span className="name">{name}</span>
         <span className="temp">{`${Math.round(temparature)}°`}</span>
-        <span>{description}</span>
-        <span>{`Humidity: ${humidity}%`}</span>
-        <span>{`Wind: ${windSpeed}m/s`}</span>
+        <span className="description">{description}</span>
+        <span className="description">{`Humidity: ${humidity}%`}</span>
+        <span className="description">{`Wind: ${windSpeed}m/s`}</span>
       </Block>
     </Block>
   );

@@ -13,8 +13,8 @@ export class SearchStore implements ISearchStore {
     if (searches.includes(value)) return;
 
     if (searches.length === 5) {
-      // Remove first element to keep max size at 5.
-      searches = searches.slice(1);
+      // Remove first element to keep max suggestions at 5.
+      searches.splice(0, 1);
     }
 
     const update = searches.length > 0 ? `${searches},${value}` : value;

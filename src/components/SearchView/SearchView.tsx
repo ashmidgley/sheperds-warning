@@ -25,7 +25,7 @@ export const SearchView: FC<SearchViewProps> = ({
 
   useEffect(() => {
     searchStore.getSearches().then((searches) => setSearches(searches));
-  }, []);
+  }, [searchStore]);
 
   return (
     <>
