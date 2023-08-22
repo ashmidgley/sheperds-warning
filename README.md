@@ -30,11 +30,7 @@ This project uses [Ionic Capacitor](https://capacitorjs.com) to build and run th
 - For iOS, make sure you have [CocoaPods](https://cocoapods.org) installed.
 - For Android, make sure you have the [Android SDK](https://developer.android.com/studio) installed.
 
-Add the platforms:
-
-```
-npx cap add ios && npx cap add android
-```
+### Build
 
 Build the web code:
 
@@ -42,11 +38,38 @@ Build the web code:
 npm run build
 ```
 
+Add the platforms:
+
+```
+npx cap add ios && npx cap add android
+```
+
 Sync the web code to the Capacitor projects:
 
 ```
 npx cap sync
 ```
+
+### Allow Location Services
+
+For iOS, add the below to the <dict> tag in `ios/App/App/Info.plist`:
+
+```
+<key>NSLocationAlwaysUsageDescription</key>
+<string>We need access to your location to provide location-based services.</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need access to your location to provide location-based services.</string>
+```
+
+For Android, add the below to `android/app/src/main/AndroidManifest.xml`:
+
+```
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-feature android:name="android.hardware.location.gps" />
+```
+
+For more details on configurating location services, see [here](https://capacitorjs.com/docs/apis/geolocation).
 
 ### Run
 

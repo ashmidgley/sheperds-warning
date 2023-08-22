@@ -3,15 +3,15 @@ import "./HomeContainer.css";
 import { debounce } from "throttle-debounce";
 import { Spinner } from "../components/Spinner/Spinner";
 import { WeatherData } from "../components/WeatherData/WeatherData";
-import { Geolocation } from "@capacitor/geolocation";
 import { Weather } from "../types/Weather";
 import { Forecast } from "../types/Forecast";
 import { AppContext } from "../contexts/AppContext";
 import { SearchView } from "../components/SearchView/SearchView";
+import { Fab, Icon } from "framework7-react";
 import { FaSearch } from "react-icons/fa";
 
 export const HomeContainer: FC = () => {
-  const { weatherApi, searchStore } = useContext(AppContext);
+  const { weatherApi, searchStore, getGeolocation } = useContext(AppContext);
 
   const [currentWeather, setCurrentWeather] = useState<Weather | null>(null);
   const [forecasts, setForecasts] = useState<Forecast[]>([]);
@@ -23,12 +23,12 @@ export const HomeContainer: FC = () => {
   useEffect(() => {
     if (currentWeather === null && forecasts.length === 0) {
       setIsLoading(true);
-      Geolocation.getCurrentPosition()
-        .then((position) => {
+      getGeolocation()
+        .then((coords) => {
           weatherApi
             .getForecastAndCurrentWeatherUsingCoords(
-              position.coords.latitude,
-              position.coords.longitude,
+              coords.latitude,
+              coords.longitude,
             )
             .then((data) => {
               setCurrentWeather(data.currentWeather);
@@ -37,7 +37,7 @@ export const HomeContainer: FC = () => {
             .catch((error) => setError(error.message))
             .finally(() => setIsLoading(false));
         })
-        .catch((error) => {
+        .catch(() => {
           /* GetPosition will throw if system location services are disabled.
            * In this case we ignore the error and let the user search for location instead.
            */
@@ -98,11 +98,13 @@ export const HomeContainer: FC = () => {
 
   return (
     <>
-      <FaSearch
-        color="white"
-        className="search-icon"
+      <Fab
         onClick={() => setIsSearching(true)}
-      />
+        tooltip="Search for alternative town, city or postcode"
+        slot="fixed"
+      >
+        <FaSearch className="search-icon" />
+      </Fab>
       {isLoading ? (
         <Spinner />
       ) : (
