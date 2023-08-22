@@ -3,7 +3,6 @@ import routes from "./routes";
 import { Framework7Parameters } from "framework7/types";
 import { App as Framework7App, View } from "framework7-react";
 import { AppContextProvider } from "./contexts/AppContext";
-import "./App.css";
 
 const f7params = {
   name: "Sheperd's Warning",

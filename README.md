@@ -25,13 +25,30 @@ npm start // run
 
 This project uses [Ionic Capacitor](https://capacitorjs.com) to build and run the application on mobile devices.
 
-For iOS and Android, add the platforms:
+### Setup
+
+- For iOS, make sure you have [CocoaPods](https://cocoapods.org) installed.
+- For Android, make sure you have the [Android SDK](https://developer.android.com/studio) installed.
+
+Add the platforms:
 
 ```
 npx cap add ios && npx cap add android
 ```
 
-Then run using the below commands:
+Build the web code:
+
+```
+npm run build
+```
+
+Sync the web code to the Capacitor projects:
+
+```
+npx cap sync
+```
+
+### Run
 
 ```
 npx cap run ios

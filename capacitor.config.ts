@@ -1,12 +1,12 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'com.sheperds.warning',
+  appId: "com.ashmidgley.SheperdsWarning",
   appName: "Sheperd's Warning",
-  webDir: 'build',
+  webDir: "build",
   server: {
-    androidScheme: 'https'
-  }
+    androidScheme: "https",
+  },
 };
 
 export default config;
