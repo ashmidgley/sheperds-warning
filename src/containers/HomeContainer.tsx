@@ -1,47 +1,50 @@
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import { Searchbar } from "framework7-react";
+import React, { ChangeEvent, FC, useContext, useEffect, useState } from "react";
+import "./HomeContainer.css";
 import { debounce } from "throttle-debounce";
-import WeatherApi from "../api/WeatherApi";
 import { Spinner } from "../components/Spinner/Spinner";
-import { Banner } from "../components/Banner/Banner";
 import { WeatherData } from "../components/WeatherData/WeatherData";
 import { Geolocation } from "@capacitor/geolocation";
 import { Weather } from "../types/Weather";
 import { Forecast } from "../types/Forecast";
+import { AppContext } from "../contexts/AppContext";
+import { SearchView } from "../components/SearchView/SearchView";
+import { FaSearch } from "react-icons/fa";
 
 export const HomeContainer: FC = () => {
-  const weatherApi = new WeatherApi(
-    process.env.REACT_APP_OPEN_WEATHER_API_KEY as string,
-  );
+  const { weatherApi, searchStore } = useContext(AppContext);
 
   const [currentWeather, setCurrentWeather] = useState<Weather | null>(null);
   const [forecasts, setForecasts] = useState<Forecast[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    Geolocation.getCurrentPosition()
-      .then((position) => {
-        weatherApi
-          .getForecastAndCurrentWeatherUsingCoords(
-            position.coords.latitude,
-            position.coords.longitude,
-          )
-          .then((data) => {
-            setCurrentWeather(data.currentWeather);
-            setForecasts(data.forecasts);
-          })
-          .catch((error) => setError(error.message))
-          .finally(() => setIsLoading(false));
-      })
-      .catch((error) => {
-        /* GetPosition will throw if system location services are disabled.
-         * In this case we ignore the error and let the user search for location instead.
-         */
-        setIsLoading(false);
-      });
-  }, []);
+    if (currentWeather === null && forecasts.length === 0) {
+      setIsLoading(true);
+      Geolocation.getCurrentPosition()
+        .then((position) => {
+          weatherApi
+            .getForecastAndCurrentWeatherUsingCoords(
+              position.coords.latitude,
+              position.coords.longitude,
+            )
+            .then((data) => {
+              setCurrentWeather(data.currentWeather);
+              setForecasts(data.forecasts);
+            })
+            .catch((error) => setError(error.message))
+            .finally(() => setIsLoading(false));
+        })
+        .catch((error) => {
+          /* GetPosition will throw if system location services are disabled.
+           * In this case we ignore the error and let the user search for location instead.
+           */
+          setIsLoading(false);
+        });
+    }
+  }, [currentWeather, forecasts]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value;
@@ -49,7 +52,10 @@ export const HomeContainer: FC = () => {
       handleClear();
       return;
     }
+    search(name);
+  };
 
+  const search = (name: string) => {
     setError("");
     setIsLoading(true);
     weatherApi
@@ -57,6 +63,8 @@ export const HomeContainer: FC = () => {
       .then((data) => {
         setCurrentWeather(data.currentWeather);
         setForecasts(data.forecasts);
+        setIsSearching(false);
+        searchStore.addSearch(name);
       })
       .catch((error) => setError(error.message))
       .finally(() => setIsLoading(false));
@@ -69,34 +77,37 @@ export const HomeContainer: FC = () => {
     },
   );
 
-  const getContent = (): JSX.Element => {
-    if (isLoading) {
-      return <Spinner />;
-    }
-
-    if (error) {
-      return <Banner message={error} type="error" />;
-    }
-
-    return (
-      <WeatherData currentWeather={currentWeather} forecasts={forecasts} />
-    );
-  };
-
   const handleClear = () => {
+    setIsSearching(false);
     setError("");
     setCurrentWeather(null);
     setForecasts([]);
   };
 
+  if (isSearching) {
+    return (
+      <SearchView
+        error={error}
+        isLoading={isLoading}
+        onChange={handleChangeDebounced}
+        onClear={handleClear}
+        onClickSuggestion={search}
+      />
+    );
+  }
+
   return (
     <>
-      <Searchbar
-        onChange={handleChangeDebounced}
-        onClickClear={handleClear}
-        onClickDisable={handleClear}
+      <FaSearch
+        color="white"
+        className="search-icon"
+        onClick={() => setIsSearching(true)}
       />
-      {getContent()}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <WeatherData currentWeather={currentWeather} forecasts={forecasts} />
+      )}
     </>
   );
 };

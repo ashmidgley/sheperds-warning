@@ -2,8 +2,6 @@ import React, { FC } from "react";
 import { Block } from "framework7-react";
 import "./CurrentWeather.css";
 
-const openWeatherImgBaseUrl = "https://openweathermap.org/img/wn";
-
 interface CurrentWeatherProps {
   name: string;
   temparature: number;
@@ -23,17 +21,9 @@ export const CurrentWeather: FC<CurrentWeatherProps> = ({
 }) => {
   return (
     <Block className="current-weather">
-      <Block className="col">
+      <Block className="col" textColor="white">
         <span className="name">{name}</span>
-        <Block className="temp-container">
-          <img
-            src={`${openWeatherImgBaseUrl}/${icon}.png`}
-            alt="open weather icon"
-          />
-          <span className="temp">{`${Math.round(temparature)}°C`}</span>
-        </Block>
-      </Block>
-      <Block className="col">
+        <span className="temp">{`${Math.round(temparature)}°`}</span>
         <span>{description}</span>
         <span>{`Humidity: ${humidity}%`}</span>
         <span>{`Wind: ${windSpeed}m/s`}</span>

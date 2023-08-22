@@ -1,6 +1,6 @@
 import { WeatherApiResult } from "../types/WeatherApiResult";
 
-interface IWeatherApi {
+export interface IWeatherApi {
   getForecastAndCurrentWeather(name: string): Promise<WeatherApiResult>;
   getForecastAndCurrentWeatherUsingCoords(
     lat: number,

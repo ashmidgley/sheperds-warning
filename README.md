@@ -50,8 +50,8 @@ npx cap run android
 - Current Weather
 - Weather Forecast
 - Geolocation
+- Data Storage
 
 ## Unimplemented Features
 
-- Data Storage
 - Offline First

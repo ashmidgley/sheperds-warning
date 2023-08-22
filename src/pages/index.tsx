@@ -4,7 +4,7 @@ import { HomeContainer } from "../containers/HomeContainer";
 
 export const Home = () => {
   return (
-    <Page name="home">
+    <Page name="home" bgColor="lightblue">
       <PageContent>
         <HomeContainer />
       </PageContent>
