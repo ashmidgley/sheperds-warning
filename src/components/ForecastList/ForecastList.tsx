@@ -43,7 +43,9 @@ export const ForecastList: FC<ForecastsListProps> = ({ forecasts }) => {
                 />
                 <span>{getDay(forecast.timestamp)}</span>
               </Block>
-              <span className="high-low">{`${forecast.min}° / ${forecast.max}°`}</span>
+              <span className="high-low">{`${Math.round(
+                forecast.min,
+              )}° / ${Math.round(forecast.max)}°`}</span>
             </Block>
           </ListItem>
         ))}
