@@ -1,4 +1,4 @@
-<img width="263" alt="Screenshot 2023-08-23 at 7 28 44 AM" src="https://github.com/ashmidgley/sheperds-warning/assets/13953984/7b806f12-5a16-4b1c-a4fe-7a5614d7bb0a">
+<img width="264" alt="Screenshot 2023-08-23 at 7 46 18 AM" src="https://github.com/ashmidgley/sheperds-warning/assets/13953984/a280f220-5671-42a2-b5c9-8448fdeaf728">
 <img width="268" alt="Screenshot 2023-08-23 at 7 31 38 AM" src="https://github.com/ashmidgley/sheperds-warning/assets/13953984/082195e4-bc1f-4595-9a9e-d56bd069c575">
 
 ## Setup
